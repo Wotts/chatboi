@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ChatBox from "./components/ChatBox.vue";
+import ChatConversation from "./components/ChatConversation.vue";
 </script>
 
 <template>
@@ -14,6 +15,7 @@ import ChatBox from "./components/ChatBox.vue";
 
     <div class="wrapper">
       <ChatBox />
+      <ChatConversation />
     </div>
   </header>
 </template>
