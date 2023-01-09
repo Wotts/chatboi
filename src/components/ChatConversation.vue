@@ -11,10 +11,3 @@ const chatStore = useChatStore();
     </p>
   </div>
 </template>
-
-<style scoped>
-div {
-  display: flex;
-  flex-direction: column;
-}
-</style>
