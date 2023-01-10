@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import ChatInput from "./ChatInput.vue";
+import { ref, onMounted, nextTick } from "vue";
+import ChatInput from "@/components/ChatInput.vue";
+import ChatConversation from "@/components/ChatConversation.vue";
 import { useChatStore } from "@/stores/chat";
 
 const userId = ref<number>(0);
 
 const chatStore = useChatStore();
 
-const chat = (message: string) => {
+const newChatMessage = (message: string) => {
   chatStore.storeChatMessage(userId.value, message);
+
+  const chatBox = document.getElementById("chat-box");
+  if (chatBox) {
+    nextTick(() => chatBox.scrollTo(0, chatBox.scrollHeight));
+  }
 };
 
 const randomInt = (max: number) => {
@@ -21,8 +27,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <h1>Welcome to Chatboi</h1>
-    <ChatInput @send="chat" />
+  <div class="flex h-full flex-col">
+    <h1 class="mb-4 text-2xl text-stone-500">
+      Welcome back, chatboi {{ userId }}
+    </h1>
+    <ChatConversation :this-user-id="userId" />
+    <ChatInput class="mt-2 w-full" @send="newChatMessage" />
   </div>
 </template>
